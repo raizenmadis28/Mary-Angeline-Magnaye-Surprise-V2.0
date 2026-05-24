@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratory Request Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: 'Poppins', sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        
+        .card { width: 100%; max-width: 480px; background: white; border-top: 5px solid #800000; border-radius: 10px; padding: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); text-align: left; position: relative; }
+        
+        /* FORM STYLES */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 14px; color: #555; margin-bottom: 5px; font-weight: 600; }
+        .form-group input { width: 100%; padding: 12px; font-size: 16px; font-family: 'Poppins', sans-serif; border: 1px solid #ccc; border-radius: 6px; background-color: #e9ecef; color: #333; box-sizing: border-box; font-weight: bold; }
+        
+        /* BUTTONS */
+        .btn-primary { width: 100%; padding: 15px; background: #800000; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; font-family: 'Poppins', sans-serif; }
+        .btn-primary:hover { background: #660000; }
+        .btn-secondary { width: 100%; padding: 15px; background: #FFD700; color: #800000; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 15px; font-family: 'Poppins', sans-serif; }
+        
+        /* PROCESSING ANIMATION */
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #800000; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* SCROLLABLE MESSAGE */
+        .scrollable-content { max-height: 60vh; overflow-y: auto; padding-right: 10px; }
+        .scrollable-content::-webkit-scrollbar { width: 6px; }
+        .scrollable-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .scrollable-content::-webkit-scrollbar-thumb { background: #800000; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div id="step-form" class="card">
+        <h2 style="color: #800000; margin-top: 0; margin-bottom: 5px; font-size: 22px;">Laboratory Request Form 🩺</h2>
+        <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Please verify patient details before extraction.</p>
+        
+        <div class="form-group">
+            <label>Patient Name:</label>
+            <input type="text" value="Renee Benedikt S. Madis" readonly>
+        </div>
+        <div class="form-group">
+            <label>Blood Type / Donor:</label>
+            <input type="text" value="O Negative (O-) 🩸" style="color: #800000;" readonly>
+        </div>
+        <div class="form-group">
+            <label>Attending MedTech:</label>
+            <input type="text" value="Mary Angeline C. Magnaye" readonly>
+        </div>
+        
+        <button class="btn-primary" onclick="processLab()">Process Extraction & Results 💉</button>
+    </div>
+
+    <div id="step-processing" class="card" style="display: none; text-align: center;">
+        <h2 style="color: #800000;">Processing Sample...</h2>
+        <div class="loader"></div>
+        <p style="font-size: 16px; color: #555;" id="process-text">Extracting O Negative blood...</p>
+    </div>
+
+    <div id="step-results" class="card" style="display: none;">
+        <h2 style="color: #800000; margin-top: 0; border-bottom: 2px solid #FFD700; padding-bottom: 10px; font-size: 20px;">Confidential: Lab Findings 📋</h2>
+        
+        <div class="scrollable-content">
+            <p style="font-size: 18px; line-height: 1.6; color: #27272a; margin-top: 15px;">
+                Happy 20th Birthday, Future RMT! 🎂 😊 🩵<br><br>
+                Pasensya na, ako 'yung naging patient sa lab report mo. Gusto ko lang sabihin na best wishes sa'yo bilang friend mo since SHS. Wish ko na maabot mo lahat ng pangarap mo at maging RMT ka na soon. Alam kong kayang-kaya mo 'yan! ✨ 🌸 🩷<br><br>
+                Salamat sa pagiging mapangalaga na kaibigan. Tulad nga ng nasa diagnosis... miss na kita. Enjoy your day! 🌻 🩵<br><br>
+                As your patient, isa lang ang hiling ko... sana mapansin mo ako kahit college na tayo. 🌹🩵🩷<br><br>
+                Love,<br><strong>Renee Benedikt S. Madis 🌻</strong>
+            </p>
+
+            <div style="margin-top: 25px; border-top: 2px dashed #ccc; padding-top: 20px;">
+                <h4 style="color: #800000; margin-top: 0; margin-bottom: 5px;">Patient's Attachments for Doc Angeline 📸</h4>
+                <p style="font-size: 14px; color: #555; margin-top: 0; margin-bottom: 15px; font-style: italic;">"Ebidensya ng pagkakaibigan natin simula pa nung Grade 11..."</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <img src="images/pic1.jpg" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid #e0e0e0;">
+                    <img src="images/pic2.jpg" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid #e0e0e0;">
+                    <img src="images/pic3.jpg" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid #e0e0e0;">
+                    <img src="images/pic4.jpg" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid #e0e0e0;">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-secondary" onclick="showReply()">Send Doctor's Note to RB 💌</button>
+    </div>
+
+    <div id="step-reply" class="card" style="display: none;">
+        <h2 style="color: #800000; margin-top: 0; font-size: 20px;">Doctor's Note for Patient RB:</h2>
+        <textarea id="angelineReply" rows="6" placeholder="Type your reply here, Doc..." style="width: 100%; padding: 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; resize: none; font-family: 'Poppins', sans-serif;"></textarea>
+        
+        <button class="btn-primary" onclick="sendEmail()">Send Message 🚀</button>
+    </div>
+
+    <script>
+        function processLab() {
+            document.getElementById('step-form').style.display = 'none';
+            document.getElementById('step-processing').style.display = 'block';
+
+            setTimeout(() => {
+                document.getElementById('process-text').innerText = "Analyzing results...";
+            }, 1500);
+
+            setTimeout(() => {
+                document.getElementById('step-processing').style.display = 'none';
+                document.getElementById('step-results').style.display = 'block';
+            }, 3000);
+        }
+
+        function showReply() {
+            document.getElementById('step-results').style.display = 'none';
+            document.getElementById('step-reply').style.display = 'block';
+        }
+
+        function sendEmail() {
+            const replyText = document.getElementById('angelineReply').value;
+            if(replyText.trim() === "") { 
+                alert("Doc, kailangan po ng message bago i-send! 😊"); 
+                return; 
+            }
+            
+            const email = "reneemadis28@gmail.com";
+            const subject = encodeURIComponent("Doctor's Note from Angeline");
+            const body = encodeURIComponent(replyText);
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            
+            setTimeout(() => {
+                alert("Salamat, Angeline! Message ready to send. 😊");
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
